@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: auth-service
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27017/auth-db?authSource=admin
+
+grpc:
+  server:
+    port: 9091 # Different port than User Service (9090)
+
+logging:
+  level:
+    root: INFO

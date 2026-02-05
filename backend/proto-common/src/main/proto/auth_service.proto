@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package com.nbt.proto.auth;
+
+option java_multiple_files = true;
+option java_package = "com.nbt.proto.auth";
+option java_outer_classname = "AuthProto";
+
+service AuthService {
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+    rpc RequestTwoFactor (TwoFactorRequest) returns (TwoFactorResponse);
+    rpc VerifyTwoFactor (VerifyTwoFactorRequest) returns (LoginResponse); // Returns token on success
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string token = 1;
+    bool mfa_required = 2;
+    string temp_token = 3; // Used for MFA verification step
+}
+
+message ValidateTokenRequest {
+    string token = 1;
+}
+
+message ValidateTokenResponse {
+    bool valid = 1;
+    string user_id = 2;
+    repeated string roles = 3;
+}
+
+message TwoFactorRequest {
+    string user_id = 1;
+    string method = 2; // EMAIL, SMS, APP
+}
+
+message TwoFactorResponse {
+    bool sent = 1;
+    string message = 2;
+}
+
+message VerifyTwoFactorRequest {
+    string temp_token = 1;
+    string code = 2;
+}

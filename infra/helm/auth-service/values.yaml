@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: nbt/auth-service
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 9091
+
+mongodb:
+  uri: mongodb://admin:password@nbt-mongo:27017/auth-db?authSource=admin

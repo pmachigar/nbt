@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.nbt.proto.billing;
+
+option java_multiple_files = true;
+option java_package = "com.nbt.proto.billing";
+option java_outer_classname = "BillingProto";
+
+service BillingService {
+    rpc GenerateInvoice (GenerateInvoiceRequest) returns (Invoice);
+    rpc GetInvoices (GetInvoicesRequest) returns (GetInvoicesResponse);
+}
+
+message InvoiceItem {
+    string description = 1;
+    double amount = 2;
+    int32 quantity = 3;
+}
+
+message Invoice {
+    string id = 1;
+    string user_id = 2;
+    repeated InvoiceItem items = 3;
+    double total_value = 4;
+    string issue_date = 5;
+    string status = 6; // PENDING, PAID
+}
+
+message GenerateInvoiceRequest {
+    string user_id = 1;
+    repeated string subscription_ids = 2; // Generate based on these subs
+}
+
+message GetInvoicesRequest {
+    string user_id = 1;
+}
+
+message GetInvoicesResponse {
+    repeated Invoice invoices = 1;
+}

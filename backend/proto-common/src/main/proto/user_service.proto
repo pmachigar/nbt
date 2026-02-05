@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package com.nbt.proto.user;
+
+option java_multiple_files = true;
+option java_package = "com.nbt.proto.user";
+option java_outer_classname = "UserProto";
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (UserResponse);
+    rpc GetUser (GetUserRequest) returns (UserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+message Address {
+    string pais = 1;
+    string ciudad = 2;
+    string region = 3;
+    string comuna = 4;
+    string calle = 5;
+    string numero = 6;
+    string piso = 7;
+    string apartamento = 8;
+    string block = 9;
+    string zona = 10;
+}
+
+message Contact {
+    string telefono = 1;
+    string email = 2;
+    string instagram = 3;
+    string facebook = 4;
+}
+
+message CreateUserRequest {
+    string id_documento = 1;
+    string nombre = 2;
+    Address direccion = 3;
+    Contact contacto = 4;
+}
+
+message GetUserRequest {
+    string id_documento = 1;
+}
+
+message UpdateUserRequest {
+    string id_documento = 1;
+    string nombre = 2;
+    Address direccion = 3;
+    Contact contacto = 4;
+}
+
+message DeleteUserRequest {
+    string id_documento = 1;
+}
+
+message DeleteUserResponse {
+    bool success = 1;
+}
+
+message UserResponse {
+    string id = 1; // Mongo ID
+    string id_documento = 2;
+    string nombre = 3;
+    Address direccion = 4;
+    Contact contacto = 5;
+}
