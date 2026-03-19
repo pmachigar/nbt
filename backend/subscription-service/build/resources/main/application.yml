@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: subscription-service
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27017/subscription-db?authSource=admin
+
+grpc:
+  server:
+    port: 9093
+
+logging:
+  level:
+    root: INFO

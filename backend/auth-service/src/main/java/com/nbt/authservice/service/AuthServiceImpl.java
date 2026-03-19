@@ -1,14 +1,15 @@
 package com.nbt.authservice.service;
 
-import com.nbt.authservice.domain.AuthUser;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.nbt.authservice.repository.AuthRepository;
 import com.nbt.authservice.security.JwtUtils;
 import com.nbt.proto.auth.*;
+
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @GrpcService
 @RequiredArgsConstructor

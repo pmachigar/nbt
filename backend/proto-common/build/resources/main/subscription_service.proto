@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.nbt.proto.subscription;
+
+option java_multiple_files = true;
+option java_package = "com.nbt.proto.subscription";
+option java_outer_classname = "SubscriptionProto";
+
+service SubscriptionService {
+    rpc Subscribe (SubscribeRequest) returns (Subscription);
+    rpc Unsubscribe (UnsubscribeRequest) returns (Subscription);
+    rpc GetUserSubscriptions (GetUserSubscriptionsRequest) returns (GetUserSubscriptionsResponse);
+}
+
+message Subscription {
+    string id = 1;
+    string user_id = 2;
+    string service_id = 3;
+    double rate = 4; // Snapshot of rate at time of subscription
+    string status = 5; // ACTIVE, CANCELLED
+    string start_date = 6;
+    string end_date = 7;
+}
+
+message SubscribeRequest {
+    string user_id = 1;
+    string service_id = 2;
+}
+
+message UnsubscribeRequest {
+    string subscription_id = 1;
+}
+
+message GetUserSubscriptionsRequest {
+    string user_id = 1;
+}
+
+message GetUserSubscriptionsResponse {
+    repeated Subscription subscriptions = 1;
+}

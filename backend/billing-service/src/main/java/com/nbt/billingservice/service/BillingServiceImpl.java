@@ -67,7 +67,7 @@ public class BillingServiceImpl extends BillingServiceGrpc.BillingServiceImplBas
 
     private com.nbt.proto.billing.Invoice toProto(Invoice domain) {
         List<com.nbt.proto.billing.InvoiceItem> protoItems = domain.getItems() != null
-                ? domain.getItems().stream().map(this::toProtoItem).collect(Collectors.toList())
+                ? domain.getItems().stream().map(item -> toProtoItem(item)).collect(Collectors.toList())
                 : new ArrayList<>();
 
         return com.nbt.proto.billing.Invoice.newBuilder()

@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'nbt-backend'
+
+include 'proto-common'
+include 'user-service'
+include 'auth-service'
+include 'catalog-service'
+include 'subscription-service'
+include 'billing-service'

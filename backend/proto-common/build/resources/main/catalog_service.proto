@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.nbt.proto.catalog;
+
+option java_multiple_files = true;
+option java_package = "com.nbt.proto.catalog";
+option java_outer_classname = "CatalogProto";
+
+service CatalogService {
+    rpc CreateService (CreateServiceRequest) returns (ServiceItem);
+    rpc GetService (GetServiceRequest) returns (ServiceItem);
+    rpc ListServices (ListServicesRequest) returns (ListServicesResponse);
+}
+
+message ServiceItem {
+    string id = 1;
+    string description = 2;
+    double rate = 3;
+    string unit_of_measure = 4; // e.g., "MONTH", "GB", "HOUR"
+}
+
+message CreateServiceRequest {
+    string description = 1;
+    double rate = 2;
+    string unit_of_measure = 3;
+}
+
+message GetServiceRequest {
+    string id = 1;
+}
+
+message ListServicesRequest {
+    int32 page = 1;
+    int32 size = 2;
+}
+
+message ListServicesResponse {
+    repeated ServiceItem services = 1;
+    int64 total_count = 2;
+}

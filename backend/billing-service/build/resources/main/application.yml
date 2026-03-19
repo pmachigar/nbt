@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: billing-service
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27017/billing-db?authSource=admin
+
+grpc:
+  server:
+    port: 9094
+
+logging:
+  level:
+    root: INFO
